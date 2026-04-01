@@ -26,4 +26,3 @@ def tasks_view(request):
 
 def users_view(request):
     return render(request, 'tasks/users.html', {"users": users})
-
