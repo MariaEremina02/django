@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from config.models import BaseModel
+from django.conf import settings
+from ..managers import CompletedTaskManager
 
 class TaskStatus(models.TextChoices):
     CREATED = "created"
@@ -45,6 +47,20 @@ class Tasks(BaseModel):
         auto_now=True,
         verbose_name="Дата обновления"
     )
+    users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="tasks"
+    )
+    assignee = models.ForeignKey(
+        to = "Projects",
+        related_name="tasks",
+        on_delete=models.CASCADE,
+        null = True,
+        blank = True,
+    )
+
+    objects = models.Manager()
+    completed = CompletedTaskManager()
 
     class Meta:
         ordering = ["-priority","-created_at"]

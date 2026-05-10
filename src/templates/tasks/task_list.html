@@ -1,0 +1,17 @@
+<h1>Все задачи</h1>
+
+{% for task in tasks %}
+    <div style="border:1px solid #ccc; margin:10px; padding:10px;">
+        <h3>{{ task.name }}</h3>
+        <p>Статус: {{ task.status }}</p>
+        <p>Приоритет: {{ task.priority }}</p>
+        <p>Проект: {{ task.assignee }}</p>
+
+        <h4>Комментарии:</h4>
+        {% for comment in task.comments.all %}
+            <p><b>{{ comment.user }}:</b> {{ comment.message }}</p>
+        {% empty %}
+            <p>Нет комментариев</p>
+        {% endfor %}
+    </div>
+{% endfor %}

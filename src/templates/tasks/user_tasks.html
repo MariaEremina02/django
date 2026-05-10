@@ -1,0 +1,15 @@
+<h1>Задачи пользователя {{ user.username }}</h1>
+
+{% for task in tasks %}
+    <div>
+        <h3>{{ task.name }}</h3>
+        <p>Статус: {{ task.status }}</p>
+
+        <p>Комментарии:</p>
+        {% for comment in task.comments.all %}
+            <p>{{ comment.message }}</p>
+        {% empty %}
+            <p>Нет комментариев</p>
+        {% endfor %}
+    </div>
+{% endfor %}
