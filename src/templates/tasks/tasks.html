@@ -1,0 +1,22 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<h2>Задачи</h2>
+
+<table class="table">
+    <tr>
+        <th>Название</th>
+        <th>Статус</th>
+        <th>Приоритет</th>
+    </tr>
+
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.task_name }}</td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.priority }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
