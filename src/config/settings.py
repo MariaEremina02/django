@@ -66,6 +66,10 @@ INSTALLED_APPS = [
     'task_manager',
     'account',
     'crispy_forms',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'api',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -167,3 +171,34 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+#кэш
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "my_cache_table",
+        "TIMEOUT": 60 * 30,  #30 мин
+    }
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": BASE_DIR / "cache_files",
+        "TIMEOUT": 60 * 20,  # 20 минут
+    }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+LOGIN_URL = '/admin/login/'

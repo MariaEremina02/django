@@ -19,12 +19,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from task_manager.views import HomePageView
+
+from task_manager.views import TaskListView, TaskDetailView, ActiveTaskListView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('task_manager.urls')),
     path('tasks/', include('task_manager.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
+    path('', HomePageView.as_view(), name='home'),
+    path('tasks/', TaskListView.as_view(), name='task_list'),
+    path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task_detail'),
+    path('active-tasks/', ActiveTaskListView.as_view(), name='active_tasks'),
 ]
 
 
