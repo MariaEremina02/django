@@ -1,0 +1,44 @@
+<h1>Все задачи</h1>
+
+{% for task in tasks %}
+    <div style="border:1px solid #ccc; margin:10px; padding:10px;">
+        <h3>{{ task.name }}</h3>
+        <p>Статус: {{ task.status }}</p>
+        <p>Приоритет: {{ task.priority }}</p>
+        <p>Проект: {{ task.assignee }}</p>
+
+        <h4>Комментарии:</h4>
+        {% for comment in task.comments.all %}
+            <p><b>{{ comment.user }}:</b> {{ comment.message }}</p>
+        {% empty %}
+            <p>Нет комментариев</p>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+
+<h1>Список задач</h1>
+
+{% for task in tasks %}
+    <p>
+        {{ task }}
+    </p>
+{% endfor %}
+
+
+{% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page=1">Первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+    {% endif %}
+
+    <span>
+        Страница {{ page_obj.number }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Вперед</a>
+    {% endif %}
+
+{% endif %}

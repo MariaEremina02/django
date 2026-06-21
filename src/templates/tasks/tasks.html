@@ -19,4 +19,32 @@
     {% endfor %}
 </table>
 
+<tr>
+        <td colspan="3">
+            <strong>Комментарии:</strong>
+            <ul>
+                {% for comment in task.comments.all %}
+                    <li>
+                        {{ comment.user.username }}: {{ comment.text }}
+                    </li>
+                {% empty %}
+                    <li>Комментариев нет</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+ {% endfor %}
+
+<h2>Задачи пользователя {{ user.username }}</h2>
+
+{% for task in tasks %}
+  <h3>{{ task.title }}</h3>
+
+  <h4>Его комментарии:</h4>
+  {% for comment in task.comments.all %}
+    <p>{{ comment.text }}</p>
+  {% endfor %}
+
+{% endfor %}
+
 {% endblock %}

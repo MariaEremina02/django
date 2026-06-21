@@ -1,0 +1,44 @@
+<h1>Аналитика</h1>
+
+<h2>Задачи по статусам</h2>
+{% for item in tasks_by_status %}
+    <p>{{ item.status }} — {{ item.count }}</p>
+{% endfor %}
+
+<h2>Топ проект</h2>
+<p>{{ top_project.assignee__name }} ({{ top_project.task_count }})</p>
+
+<h2>Задачи с комментариями</h2>
+{% for task in tasks_with_comments %}
+    <p>{{ task.name }} — {{ task.comment_count }}</p>
+{% endfor %}
+
+<h2>Больше 3 комментариев</h2>
+{% for task in tasks_more_3_comments %}
+    <p>{{ task.name }}</p>
+{% endfor %}
+
+<h2>Средний приоритет по проектам</h2>
+{% for item in avg_priority_by_project %}
+    <p>{{ item.assignee__name }} — {{ item.avg_priority }}</p>
+{% endfor %}
+
+<h2>Сумма приоритетов по тегам</h2>
+{% for tag in tags_priority_sum %}
+    <p>{{ tag.name }} — {{ tag.total_priority }}</p>
+{% endfor %}
+
+<h2>Комментариев больше, чем тегов</h2>
+{% for task in tasks_comments_gt_tags %}
+    <p>{{ task.name }}</p>
+{% endfor %}
+
+<h2>Топ 3 проекта</h2>
+{% for item in top_3_projects %}
+    <p>{{ item.assignee__name }} — {{ item.comment_count }}</p>
+{% endfor %}
+
+<h2>Сложные задачи</h2>
+{% for task in complex_tasks %}
+    <p>{{ task.name }}</p>
+{% endfor %}
